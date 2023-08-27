@@ -7,6 +7,6 @@ public interface PrivateUserService {
 
     UserDto get(long id);
     UserDto add(NewUserDto newUserDto);
-    UserDto update(NewUserDto updateUser);
+    UserDto update(NewUserDto updateUser, long id);
     String delete(long id);
 }

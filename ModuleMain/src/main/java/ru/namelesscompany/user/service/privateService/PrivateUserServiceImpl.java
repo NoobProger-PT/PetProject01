@@ -29,8 +29,8 @@ public class PrivateUserServiceImpl implements PrivateUserService {
     }
 
     @Override
-    public UserDto update(NewUserDto updateUser) {
-        User user = getUserIfExists(updateUser.getId());
+    public UserDto update(NewUserDto updateUser, long id) {
+        User user = getUserIfExists(id);
         if (updateUser.getName() != null) {
             user.setName(updateUser.getName());
         }

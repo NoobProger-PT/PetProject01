@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.namelesscompany.Marker;
 import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.service.adminService.AdminUserService;
@@ -22,7 +23,7 @@ public class UserAdminController {
     private final AdminUserService service;
 
     @PostMapping
-    public FullUserDto add(@RequestBody @Valid NewUserDto newUserDto) {
+    public FullUserDto add(@Validated({Marker.Create.class}) @RequestBody NewUserDto newUserDto) {
         log.info("Добавление нового пользователя админом с именем: {} и Email: {}", newUserDto.getName(), newUserDto.getEmail());
         return service.add(newUserDto);
     }
@@ -47,9 +48,9 @@ public class UserAdminController {
 
     @PatchMapping("/{userId}")
     public FullUserDto update(@PathVariable @Positive Long userId,
-                               @RequestBody NewUserDto newUserDto) {
+                              @Validated({Marker.Update.class}) @RequestBody NewUserDto updateUser) {
         log.info("Админ редактирует данные пользователя с ID: {}", userId);
-        return service.update(newUserDto);
+        return service.update(updateUser, userId);
     }
 
     @DeleteMapping("/{userId}")

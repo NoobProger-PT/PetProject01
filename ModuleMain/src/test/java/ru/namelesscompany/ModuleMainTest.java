@@ -1,11 +1,12 @@
 package ru.namelesscompany;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 public class ModuleMainTest {
     @Test
-    void contextLoads() {
+    void main() {
+        Assertions.assertDoesNotThrow(ModuleMain::new);
+        Assertions.assertDoesNotThrow(() -> ModuleMain.main(new String[]{}));
     }
 }

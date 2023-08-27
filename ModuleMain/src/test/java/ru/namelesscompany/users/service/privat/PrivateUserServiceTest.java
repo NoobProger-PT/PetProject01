@@ -1,4 +1,4 @@
-package ru.namelesscompany.users.service.admin;
+package ru.namelesscompany.users.service.privat;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,16 +7,16 @@ import ru.namelesscompany.exceptions.user.UserNotFound;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.model.User;
 import ru.namelesscompany.user.repository.UserRepository;
-import ru.namelesscompany.user.service.adminService.AdminUserServiceImpl;
+import ru.namelesscompany.user.service.privateService.PrivateUserServiceImpl;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-public class AdminUserServiceTest {
-    private AdminUserServiceImpl userService;
+public class PrivateUserServiceTest {
+    private PrivateUserServiceImpl userService;
     private UserRepository userRepository;
 
     private final User user = new User();
@@ -24,7 +24,7 @@ public class AdminUserServiceTest {
     @BeforeEach
     public void seUp() {
         userRepository = mock(UserRepository.class);
-        userService = new AdminUserServiceImpl(userRepository);
+        userService = new PrivateUserServiceImpl(userRepository);
         when(userRepository.save(any())).then(invocation -> invocation.getArgument(0));
 
         user.setId(1L);
@@ -37,7 +37,6 @@ public class AdminUserServiceTest {
         when(userRepository.save(any())).thenReturn(user);
         var result = userService.add(new NewUserDto());
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
     }
@@ -45,40 +44,16 @@ public class AdminUserServiceTest {
     @Test
     public void shouldGetById() {
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
-        var result = userService.getById(1L);
+        var result = userService.get(1L);
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
     }
 
     @Test
-    void shouldGetAll() {
-        when(userRepository.findAll()).thenReturn(Collections.singletonList(user));
-        var result = userService.getAll();
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(1, result.size());
-        Assertions.assertEquals(user.getId(), result.get(0).getId());
-    }
-
-    @Test
-    void shouldGetByIds() {
-        User user2 = new User();
-        user2.setId(2L);
-        user2.setName("Name2");
-        user2.setEmail("mail2@mail.com");
-        when(userRepository.findAll()).thenReturn(List.of(user, user2));
-        var result = userService.getAll();
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(2, result.size());
-        Assertions.assertEquals(1, result.get(0).getId());
-        Assertions.assertEquals(2, result.get(1).getId());
-    }
-
-    @Test
     void shouldNotGetByWrongId() {
         Assertions.assertThrows(UserNotFound.class, () -> {
-            userService.getById(10L);
+            userService.get(10L);
         });
     }
 
@@ -91,7 +66,6 @@ public class AdminUserServiceTest {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         var result = userService.update(newUserDto);
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
     }
@@ -102,7 +76,6 @@ public class AdminUserServiceTest {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         var result = userService.update(newUserDto);
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
     }
@@ -116,7 +89,6 @@ public class AdminUserServiceTest {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         var result = userService.update(newUserDto);
         Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
     }

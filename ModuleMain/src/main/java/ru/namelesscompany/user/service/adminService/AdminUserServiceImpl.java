@@ -52,8 +52,8 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public FullUserDto update(NewUserDto newUserDto) {
-        User user = getUserIfExists(newUserDto.getId());
+    public FullUserDto update(NewUserDto newUserDto, long id) {
+        User user = getUserIfExists(id);
         if (newUserDto.getName() != null) {
             user.setName(newUserDto.getName());
         }

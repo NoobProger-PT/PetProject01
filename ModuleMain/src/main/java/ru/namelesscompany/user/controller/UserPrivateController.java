@@ -39,8 +39,9 @@ public class UserPrivateController {
     }
 
     @PatchMapping("/{userId}")
-    public UserDto update(@Validated({Marker.Update.class}) @RequestBody NewUserDto updateUser) {
+    public UserDto update(@PathVariable @Positive Long userId,
+                          @Validated({Marker.Update.class}) @RequestBody NewUserDto updateUser) {
         log.info("Изменение данных пользователя в приватном контроллере.");
-        return service.update(updateUser);
+        return service.update(updateUser, userId);
     }
 }
