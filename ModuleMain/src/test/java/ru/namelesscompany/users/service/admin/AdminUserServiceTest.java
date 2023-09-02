@@ -85,11 +85,10 @@ public class AdminUserServiceTest {
     @Test
     void shouldUpdateUser() {
         NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setId(1L);
         newUserDto.setEmail("mulo@m.ru");
         newUserDto.setName("user");
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
@@ -100,7 +99,7 @@ public class AdminUserServiceTest {
     void shouldUpdateUser2() {
         NewUserDto newUserDto = new NewUserDto();
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
@@ -110,11 +109,10 @@ public class AdminUserServiceTest {
     @Test
     void shouldUpdateUser3() {
         NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setId(1L);
         newUserDto.setEmail("");
         newUserDto.setName("");
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getId(), result.getId());
         Assertions.assertEquals(user.getEmail(), result.getEmail());
@@ -124,11 +122,10 @@ public class AdminUserServiceTest {
     @Test
     void shouldNotUpdateWithWrongId() {
         NewUserDto upUser = new NewUserDto();
-        upUser.setId(10L);
         upUser.setEmail("mulo@m.ru");
         upUser.setName("userios");
         Assertions.assertThrows(UserNotFound.class, () -> {
-            userService.update(upUser);
+            userService.update(upUser, 10);
         });
     }
 

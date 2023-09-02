@@ -111,7 +111,7 @@ public class UserAdminControllerTest {
 
     @Test
     public void shouldPatchUserByAdmin() throws Exception {
-        when(userService.update(any(NewUserDto.class))).thenReturn(fullUserDto1);
+        when(userService.update(any(NewUserDto.class), anyLong())).thenReturn(fullUserDto1);
         mockMvc.perform(patch("/admin/users/1")
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(mapper.writeValueAsString(fullUserDto1))

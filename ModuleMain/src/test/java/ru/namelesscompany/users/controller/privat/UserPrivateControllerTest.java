@@ -84,7 +84,7 @@ public class UserPrivateControllerTest {
 
     @Test
     public void shouldPatchUser() throws Exception {
-        when(userService.update(any(NewUserDto.class))).thenReturn(userDto1);
+        when(userService.update(any(NewUserDto.class), anyLong())).thenReturn(userDto1);
         mockMvc.perform(patch("/private/users/1")
                         .characterEncoding(StandardCharsets.UTF_8)
                         .content(mapper.writeValueAsString(userDto1))

@@ -31,12 +31,10 @@ public class UserJsonTest {
     @Test
     public void shouldReturnCorrectNewUserDtoJson() throws Exception {
         NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setId(10L);
         newUserDto.setName("name");
         newUserDto.setEmail("mail@mail.mail");
 
         JsonContent<NewUserDto> result = newUserDtoJacksonTester.write(newUserDto);
-        assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(10);
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("name");
         assertThat(result).extractingJsonPathStringValue("$.email").isEqualTo("mail@mail.mail");
     }

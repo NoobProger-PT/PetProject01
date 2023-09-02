@@ -60,11 +60,10 @@ public class PrivateUserServiceTest {
     @Test
     void shouldUpdateUser() {
         NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setId(1L);
         newUserDto.setEmail("mulo@m.ru");
         newUserDto.setName("user");
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
@@ -74,7 +73,7 @@ public class PrivateUserServiceTest {
     void shouldUpdateUser2() {
         NewUserDto newUserDto = new NewUserDto();
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
@@ -83,11 +82,10 @@ public class PrivateUserServiceTest {
     @Test
     void shouldUpdateUser3() {
         NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setId(1L);
         newUserDto.setEmail("");
         newUserDto.setName("");
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto);
+        var result = userService.update(newUserDto, 1);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(user.getEmail(), result.getEmail());
         Assertions.assertEquals(user.getName(), result.getName());
@@ -96,11 +94,10 @@ public class PrivateUserServiceTest {
     @Test
     void shouldNotUpdateWithWrongId() {
         NewUserDto upUser = new NewUserDto();
-        upUser.setId(10L);
         upUser.setEmail("mulo@m.ru");
         upUser.setName("userios");
         Assertions.assertThrows(UserNotFound.class, () -> {
-            userService.update(upUser);
+            userService.update(upUser, 10);
         });
     }
 
