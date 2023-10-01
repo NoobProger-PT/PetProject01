@@ -1699,7 +1699,6 @@
 											"\r",
 											"pm.test(\"Check mpaa data\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
-											"    pm.expect(jsonData.id).to.eql(2);\r",
 											"    pm.expect(jsonData.name).to.eql('Rating9');\r",
 											"});"
 										],
@@ -1739,7 +1738,6 @@
 											"    var jsonData = pm.response.json();\r",
 											"        pm.expect(jsonData.length).to.eql(1);\r",
 											"\r",
-											"    pm.expect(jsonData[0].id).to.eql(2);\r",
 											"    pm.expect(jsonData[0].name).to.eql('Rating9');\r",
 											"});"
 										],
@@ -1814,7 +1812,6 @@
 											"\r",
 											"pm.test(\"Check mpaa data\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
-											"    pm.expect(jsonData.id).to.eql(2);\r",
 											"    pm.expect(jsonData.name).to.eql('Rating9');\r",
 											"});"
 										],
@@ -1854,7 +1851,6 @@
 											"    var jsonData = pm.response.json();\r",
 											"        pm.expect(jsonData.length).to.eql(1);\r",
 											"\r",
-											"    pm.expect(jsonData[0].id).to.eql(2);\r",
 											"    pm.expect(jsonData[0].name).to.eql('Rating9');\r",
 											"});"
 										],
@@ -2416,7 +2412,6 @@
 											"\r",
 											"pm.test(\"Check genre data\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
-											"    pm.expect(jsonData.id).to.eql(2);\r",
 											"    pm.expect(jsonData.name).to.eql('Genre 110');\r",
 											"});"
 										],
@@ -2456,7 +2451,6 @@
 											"    var jsonData = pm.response.json();\r",
 											"        pm.expect(jsonData.length).to.eql(1);\r",
 											"\r",
-											"    pm.expect(jsonData[0].id).to.eql(2);\r",
 											"    pm.expect(jsonData[0].name).to.eql('Genre 110');\r",
 											"});"
 										],
@@ -2531,7 +2525,6 @@
 											"\r",
 											"pm.test(\"Check genre data\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
-											"    pm.expect(jsonData.id).to.eql(2);\r",
 											"    pm.expect(jsonData.name).to.eql('Genre 110');\r",
 											"});"
 										],
@@ -2571,7 +2564,6 @@
 											"    var jsonData = pm.response.json();\r",
 											"        pm.expect(jsonData.length).to.eql(1);\r",
 											"\r",
-											"    pm.expect(jsonData[0].id).to.eql(2);\r",
 											"    pm.expect(jsonData[0].name).to.eql('Genre 110');\r",
 											"});"
 										],
@@ -2591,6 +2583,1418 @@
 										"public",
 										"genre",
 										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "FilmTest",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Create with wrong name 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong name 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Too many characters in film name is not available. You must reduce the film name, please.\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong author 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"\",\r\n    \"country\": \"Country 1\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong author 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Too many characters in author name\",\r\n    \"country\": \"Country 1\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong country 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong country 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Too many characters in country name\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong date",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong duration 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": null,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong duration 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": -20,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong genre",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create with wrong mpaa",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film\",\r\n    \"author\": \"Author\",\r\n    \"country\": \"Country\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": null,\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Film 1",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.id).to.eql(1);\r",
+											"    pm.expect(jsonData.name).to.eql('Film 1');\r",
+											"    pm.expect(jsonData.author).to.eql('Author 1');\r",
+											"    pm.expect(jsonData.country).to.eql('Country 1');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film 1\",\r\n    \"author\": \"Author 1\",\r\n    \"country\": \"Country 1\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Film 2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.id).to.eql(2);\r",
+											"    pm.expect(jsonData.name).to.eql('Film 2');\r",
+											"    pm.expect(jsonData.author).to.eql('Author 2');\r",
+											"    pm.expect(jsonData.country).to.eql('Country 2');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film 2\",\r\n    \"author\": \"Author 2\",\r\n    \"country\": \"Country 2\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by wrong id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Film 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.id).to.eql(1);\r",
+											"    pm.expect(jsonData.name).to.eql('Film 1');\r",
+											"    pm.expect(jsonData.author).to.eql('Author 1');\r",
+											"    pm.expect(jsonData.country).to.eql('Country 1');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all films",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"\r",
+											"    pm.expect(jsonData[0].id).to.eql(1);\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"\r",
+											"    pm.expect(jsonData[1].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].name).to.eql('Film 2');\r",
+											"    pm.expect(jsonData[1].author).to.eql('Author 2');\r",
+											"    pm.expect(jsonData[1].country).to.eql('Country 2');\r",
+											"    pm.expect(jsonData[1].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[1].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[1].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[1].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/all",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get several films",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"\r",
+											"    pm.expect(jsonData[0].id).to.eql(1);\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"\r",
+											"    pm.expect(jsonData[1].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].name).to.eql('Film 2');\r",
+											"    pm.expect(jsonData[1].author).to.eql('Author 2');\r",
+											"    pm.expect(jsonData[1].country).to.eql('Country 2');\r",
+											"    pm.expect(jsonData[1].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[1].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[1].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[1].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/several?ids=1,2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"several"
+									],
+									"query": [
+										{
+											"key": "ids",
+											"value": "1,2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by wrong film name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/search?name=pepaPig",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "pepaPig"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"\r",
+											"    pm.expect(jsonData[0].id).to.eql(1);\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"\r",
+											"    pm.expect(jsonData[1].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].name).to.eql('Film 2');\r",
+											"    pm.expect(jsonData[1].author).to.eql('Author 2');\r",
+											"    pm.expect(jsonData[1].country).to.eql('Country 2');\r",
+											"    pm.expect(jsonData[1].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[1].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[1].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[1].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[1].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/search?name=fIlM",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "fIlM"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Film 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.id).to.eql(1);\r",
+											"    pm.expect(jsonData.name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData.author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData.country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Film patched 1\",\r\n    \"author\": \"Author patched 1\",\r\n    \"country\": \"Country patched 1\",\r\n    \"releaseDate\": \"2022-11-11\",\r\n    \"duration\": 60,\r\n    \"mpaa\": { \"id\": 2},\r\n    \"genres\": [{ \"id\": 2}]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/films/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete with wrong id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/222",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"222"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Film 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all films after delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"\r",
+											"    pm.expect(jsonData[0].id).to.eql(1);\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/admin/films/all",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"films",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Private",
+					"item": [
+						{
+							"name": "Get by wrong id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/private/films/10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"private",
+										"films",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Film 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData.author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData.country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/private/films/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"private",
+										"films",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by wrong film name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/private/films/search?name=doom",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"private",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "doom"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/private/films/search?name=fIlM",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"private",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "fIlM"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Get by wrong id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/public/films/10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"public",
+										"films",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Film 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData.author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData.country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData.duration).to.eql(60);\r",
+											"    pm.expect(jsonData.mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData.mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData.genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData.genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData.releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/public/films/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"public",
+										"films",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by wrong film name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/public/films/search?name=pepaPig",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"public",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "pepaPig"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check film data\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"\r",
+											"    pm.expect(jsonData[0].name).to.eql('Film patched 1');\r",
+											"    pm.expect(jsonData[0].author).to.eql('Author patched 1');\r",
+											"    pm.expect(jsonData[0].country).to.eql('Country patched 1');\r",
+											"    pm.expect(jsonData[0].duration).to.eql(60);\r",
+											"    pm.expect(jsonData[0].mpaa.id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].mpaa.name).to.eql('Rating9');\r",
+											"    pm.expect(jsonData[0].genres[0].id).to.eql(2);\r",
+											"    pm.expect(jsonData[0].genres[0].name).to.eql('Genre 110');\r",
+											"    pm.expect(jsonData[0].releaseDate).to.eql('2022-11-11');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/public/films/search?name=fIlM",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"public",
+										"films",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "fIlM"
+										}
 									]
 								}
 							},

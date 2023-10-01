@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class NewUserDto {
     //Форма для нового пользователя или его редактирования
     @NotBlank(groups = {Marker.Create.class})
-    @Length(min = 1, max = 30, groups = {Marker.Create.class, Marker.Update.class})
+    @Length(max = 20, groups = {Marker.Create.class, Marker.Update.class})
     private String name;
     @NotBlank(groups = {Marker.Create.class})
     @Email(groups = {Marker.Create.class, Marker.Update.class})

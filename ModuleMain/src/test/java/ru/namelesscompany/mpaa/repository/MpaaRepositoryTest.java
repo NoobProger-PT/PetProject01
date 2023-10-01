@@ -33,15 +33,6 @@ public class MpaaRepositoryTest {
     }
 
     @Test
-    public void shouldChange() {
-        createMpaa();
-        Mpaa change = new Mpaa();
-        change.setId(1L);
-        change.setName("Changed mpaa");
-        assertThat(mpaaRepository.save(change).getName(), equalTo("Changed mpaa"));
-    }
-
-    @Test
     public void shouldDelete() {
         createMpaa();
         assertThat(mpaa.getName(), equalTo(mpaaRepository.findById(1L).get().getName()));

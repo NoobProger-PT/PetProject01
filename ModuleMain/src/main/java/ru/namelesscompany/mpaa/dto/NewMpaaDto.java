@@ -10,6 +10,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class NewMpaaDto {
     @NotBlank
-    @Length(min = 1, max = 7)
+    @Length(max = 8)
     private String name;
 }
