@@ -13,5 +13,4 @@ public interface AdminUserService {
     List<FullUserDto> getByIds(List<Long> ids);
     FullUserDto update(NewUserDto newUserDto, long id);
     String delete(long id);
-    //мб добавить возможность блокировать, банить и тд?
 }
