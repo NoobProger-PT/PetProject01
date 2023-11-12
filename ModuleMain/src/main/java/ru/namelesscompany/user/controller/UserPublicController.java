@@ -2,7 +2,6 @@ package ru.namelesscompany.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +13,8 @@ import javax.validation.constraints.Positive;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "public/users")
+@RequestMapping(path = "/public/users")
 @Slf4j
-@Validated
 public class UserPublicController {
 
     private final PublicUserService service;

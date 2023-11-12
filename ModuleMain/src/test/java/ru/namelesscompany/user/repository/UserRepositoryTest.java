@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
+import ru.namelesscompany.security.role.model.Role;
+import ru.namelesscompany.security.role.repository.RoleRepository;
 import ru.namelesscompany.user.model.User;
 
 import java.time.LocalDate;
@@ -19,6 +21,9 @@ public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     private final User user = new User();
 
@@ -44,6 +49,9 @@ public class UserRepositoryTest {
         secondUser.setName("Name2");
         secondUser.setEmail("2ndMail@mail.ru");
         secondUser.setRegistrationDate(LocalDate.of(2022,4,7));
+        secondUser.setPassword("{noop}111");
+        secondUser.setRole(new Role(1L, "ROLE_USER"));
+        secondUser.setOverlord(false);
         userRepository.save(secondUser);
         assertThat(2, equalTo(userRepository.findAllByIdIn(List.of(1L, 2L)).size()));
     }
@@ -63,10 +71,15 @@ public class UserRepositoryTest {
     }
 
     private void createUser() {
+        roleRepository.save(new Role(1L, "ROLE_USER"));
+
         user.setId(1L);
         user.setName("name");
         user.setEmail("email@mail.ru");
         user.setRegistrationDate(LocalDate.of(2022,9,7));
+        user.setPassword("{noop}111");
+        user.setRole(new Role(1L, "ROLE_USER"));
+        user.setOverlord(false);
         userRepository.save(user);
     }
 }

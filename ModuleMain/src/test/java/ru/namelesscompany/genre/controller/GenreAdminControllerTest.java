@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.namelesscompany.genre.dto.FullGenreDto;
 import ru.namelesscompany.genre.dto.NewGenreDto;
 import ru.namelesscompany.genre.service.adminService.AdminGenreService;
+import ru.namelesscompany.security.UserDetailsServ;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -23,11 +25,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = GenreAdminController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class GenreAdminControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     ObjectMapper mapper;
+    @MockBean
+    UserDetailsServ userDetailsServ;
     @MockBean
     private AdminGenreService genreService;
 

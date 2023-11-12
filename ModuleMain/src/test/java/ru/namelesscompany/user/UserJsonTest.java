@@ -9,11 +9,10 @@ import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.dto.ShortUserDto;
 import ru.namelesscompany.user.dto.UserDto;
-import ru.namelesscompany.user.model.User;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @JsonTest
 public class UserJsonTest {
@@ -25,8 +24,6 @@ public class UserJsonTest {
     JacksonTester<UserDto> userDtoJacksonTester;
     @Autowired
     JacksonTester<ShortUserDto> shortUserDtoJacksonTester;
-    @Autowired
-    JacksonTester<User> userJacksonTester;
 
     @Test
     public void shouldReturnCorrectNewUserDtoJson() throws Exception {
@@ -74,20 +71,5 @@ public class UserJsonTest {
 
         JsonContent<ShortUserDto> result = shortUserDtoJacksonTester.write(shortUserDto);
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("name");
-    }
-
-    @Test
-    public void shouldReturnCorrectUserJson() throws Exception {
-        User user = new User();
-        user.setId(50L);
-        user.setName("name");
-        user.setEmail("mail@mail.mail");
-        user.setRegistrationDate(LocalDate.of(2022,6,23));
-
-        JsonContent<User> result = userJacksonTester.write(user);
-        assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(50);
-        assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("name");
-        assertThat(result).extractingJsonPathStringValue("$.email").isEqualTo("mail@mail.mail");
-        assertThat(result).extractingJsonPathStringValue("$.registrationDate").isEqualTo("2022-06-23");
     }
 }

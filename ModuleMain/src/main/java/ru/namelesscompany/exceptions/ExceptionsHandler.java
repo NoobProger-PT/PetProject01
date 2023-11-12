@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import ru.namelesscompany.exceptions.admin_subadmin.SubAdminNotFound;
 import ru.namelesscompany.exceptions.film.FilmNotFound;
 import ru.namelesscompany.exceptions.genre.GenreNotFound;
 import ru.namelesscompany.exceptions.mpaa.MpaaNotFound;
@@ -20,6 +21,14 @@ import java.time.format.DateTimeFormatter;
 public class ExceptionsHandler {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionResponse> SubAdminNotFound(final SubAdminNotFound e) {
+        log.info("Субадмин не найден. {}", e.getMessage());
+        String exceptionName = e.getClass().getName();
+        return new ResponseEntity<>(new ExceptionResponse(exceptionName, e.getMessage(),
+                "NOT_FOUND", LocalDateTime.now().format(formatter)), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler
     public ResponseEntity<ExceptionResponse> filmNotFound(final FilmNotFound e) {

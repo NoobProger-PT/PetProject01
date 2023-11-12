@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.namelesscompany.security.UserDetailsServ;
+import ru.namelesscompany.security.role.model.Role;
 import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.service.adminService.AdminUserService;
@@ -24,12 +27,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserAdminController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class UserAdminControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     ObjectMapper mapper;
+
+    @MockBean
+    UserDetailsServ userDetailsServ;
 
     @MockBean
     private AdminUserService userService;
@@ -44,11 +51,17 @@ public class UserAdminControllerTest {
         fullUserDto1.setName("Random name 1");
         fullUserDto1.setRegistrationDate(LocalDate.of(2000,2,12));
         fullUserDto1.setEmail("soap1@mail.exp");
+        fullUserDto1.setOverlord(false);
+        fullUserDto1.setPassword("{noop}1111");
+        fullUserDto1.setRole(new Role(3L, "ROLE_USER"));
         //Инициализация пользователя № 2
         fullUserDto2.setId(2L);
         fullUserDto2.setName("Random name 2");
         fullUserDto2.setRegistrationDate(LocalDate.of(2010,12,30));
         fullUserDto2.setEmail("soap2@mail.exp");
+        fullUserDto1.setOverlord(false);
+        fullUserDto1.setPassword("{noop}1111");
+        fullUserDto1.setRole(new Role(3L, "ROLE_USER"));
     }
 
     @Test

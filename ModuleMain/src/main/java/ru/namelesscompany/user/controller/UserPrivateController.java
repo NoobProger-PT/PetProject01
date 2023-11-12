@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.namelesscompany.Marker;
+import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.dto.UserDto;
 import ru.namelesscompany.user.service.privateService.PrivateUserService;
@@ -15,7 +16,6 @@ import javax.validation.constraints.Positive;
 @RequiredArgsConstructor
 @RequestMapping(path = "/private/users")
 @Slf4j
-@Validated
 public class UserPrivateController {
 
     private final PrivateUserService service;
@@ -27,7 +27,7 @@ public class UserPrivateController {
     }
 
     @PostMapping()
-    public UserDto add(@RequestBody @Validated({Marker.Create.class}) NewUserDto newUserDto) {
+    public FullUserDto add(@Validated({Marker.Create.class}) @RequestBody NewUserDto newUserDto) {
         log.info("Добавление нового пользователя в приватном контроллере.");
         return service.add(newUserDto);
     }

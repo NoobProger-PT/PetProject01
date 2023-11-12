@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.namelesscompany.film.dto.FilmDto;
 import ru.namelesscompany.film.service.privateService.PrivateFilmService;
 import ru.namelesscompany.genre.model.Genre;
 import ru.namelesscompany.mpaa.model.Mpaa;
+import ru.namelesscompany.security.UserDetailsServ;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -27,11 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FilmPrivateController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class FilmPrivateControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     ObjectMapper mapper;
+    @MockBean
+    UserDetailsServ userDetailsServ;
     @MockBean
     private PrivateFilmService filmService;
     private static final FilmDto filmDto = new FilmDto();

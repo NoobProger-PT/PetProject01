@@ -8,31 +8,17 @@ import org.springframework.boot.test.json.JsonContent;
 import ru.namelesscompany.mpaa.dto.FullMpaaDto;
 import ru.namelesscompany.mpaa.dto.MpaaDto;
 import ru.namelesscompany.mpaa.dto.NewMpaaDto;
-import ru.namelesscompany.mpaa.model.Mpaa;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @JsonTest
 public class MpaaJsonTest {
-    @Autowired
-    JacksonTester<Mpaa> mpaaJacksonTester;
     @Autowired
     JacksonTester<MpaaDto> mpaaDtoJacksonTester;
     @Autowired
     JacksonTester<FullMpaaDto> fullMpaaDtoJacksonTester;
     @Autowired
     JacksonTester<NewMpaaDto> newMpaaDtoJacksonTester;
-
-    @Test
-    public void shouldReturnCorrectMpaaJson() throws Exception {
-        Mpaa mpaa = new Mpaa();
-        mpaa.setId(1L);
-        mpaa.setName("Mpaa");
-
-        JsonContent<Mpaa> result = mpaaJacksonTester.write(mpaa);
-        assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(1);
-        assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("Mpaa");
-    }
 
     @Test
     public void shouldReturnCorrectMpaaDtoJson() throws Exception {

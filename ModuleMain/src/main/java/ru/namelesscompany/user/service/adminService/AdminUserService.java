@@ -6,7 +6,6 @@ import ru.namelesscompany.user.dto.NewUserDto;
 import java.util.List;
 
 public interface AdminUserService {
-
     FullUserDto add(NewUserDto newUserDto);
     FullUserDto getById(long id);
     List<FullUserDto> getAll();

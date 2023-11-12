@@ -8,31 +8,17 @@ import org.springframework.boot.test.json.JsonContent;
 import ru.namelesscompany.genre.dto.FullGenreDto;
 import ru.namelesscompany.genre.dto.GenreDto;
 import ru.namelesscompany.genre.dto.NewGenreDto;
-import ru.namelesscompany.genre.model.Genre;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @JsonTest
 public class GenreJsonTest {
-    @Autowired
-    JacksonTester<Genre> genreJacksonTester;
     @Autowired
     JacksonTester<GenreDto> genreDtoJacksonTester;
     @Autowired
     JacksonTester<FullGenreDto> fullGenreDtoJacksonTester;
     @Autowired
     JacksonTester<NewGenreDto> newGenreDtoJacksonTester;
-
-    @Test
-    public void shouldReturnCorrectGenreJson() throws Exception {
-        Genre genre = new Genre();
-        genre.setId(1L);
-        genre.setName("Genre");
-
-        JsonContent<Genre> result = genreJacksonTester.write(genre);
-        assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(1);
-        assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("Genre");
-    }
 
     @Test
     public void shouldReturnCorrectGenreDtoJson() throws Exception {

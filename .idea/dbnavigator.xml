@@ -33,6 +33,7 @@
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/ModuleMain/src/main/resources/database/createDataBase.sql" connection-id="1ac70b1e-ca49-461c-a0ab-82dda3263e2d" session-id="MAIN" current-schema="public" />
+    <mapping file-url="file://$PROJECT_DIR$/ModuleMain/src/main/resources/database/addDataInDataBase.sql" connection-id="1ac70b1e-ca49-461c-a0ab-82dda3263e2d" session-id="MAIN" current-schema="public" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />

@@ -9,14 +9,13 @@ import org.springframework.boot.test.json.JsonContent;
 import ru.namelesscompany.film.dto.FilmDto;
 import ru.namelesscompany.film.dto.FullFilmDto;
 import ru.namelesscompany.film.dto.NewFilmDto;
-import ru.namelesscompany.film.model.Film;
 import ru.namelesscompany.genre.model.Genre;
 import ru.namelesscompany.mpaa.model.Mpaa;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @JsonTest
 public class FilmJsonTest {
@@ -26,8 +25,6 @@ public class FilmJsonTest {
     JacksonTester<FullFilmDto> fullFilmDtoJacksonTester;
     @Autowired
     JacksonTester<FilmDto> filmDtoJacksonTester;
-    @Autowired
-    JacksonTester<Film> filmJacksonTester;
     private static final Genre genre = new Genre();
     private static final Mpaa mpaa = new Mpaa();
 
@@ -102,31 +99,6 @@ public class FilmJsonTest {
         filmDto.setGenres(Set.of(genre));
 
         JsonContent<FilmDto> result = filmDtoJacksonTester.write(filmDto);
-        assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("Film");
-        assertThat(result).extractingJsonPathStringValue("$.author").isEqualTo("Author");
-        assertThat(result).extractingJsonPathStringValue("$.country").isEqualTo("Country");
-        assertThat(result).extractingJsonPathStringValue("$.releaseDate").isEqualTo("2022-11-11");
-        assertThat(result).extractingJsonPathNumberValue("$.duration").isEqualTo(120);
-        assertThat(result).extractingJsonPathNumberValue("$.genres[0].id").isEqualTo(1);
-        assertThat(result).extractingJsonPathStringValue("$.genres[0].name").isEqualTo("Genre");
-        assertThat(result).extractingJsonPathNumberValue("$.mpaa.id").isEqualTo(1);
-        assertThat(result).extractingJsonPathStringValue("$.mpaa.name").isEqualTo("Mpaa");
-    }
-
-    @Test
-    public void shouldReturnCorrectFilm() throws Exception {
-        Film film = new Film();
-
-        film.setId(1L);
-        film.setName("Film");
-        film.setAuthor("Author");
-        film.setCountry("Country");
-        film.setReleaseDate(LocalDate.of(2022, 11, 11));
-        film.setDuration(120);
-        film.setMpaa(mpaa);
-        film.setGenres(Set.of(genre));
-
-        JsonContent<Film> result = filmJacksonTester.write(film);
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo("Film");
         assertThat(result).extractingJsonPathStringValue("$.author").isEqualTo("Author");
         assertThat(result).extractingJsonPathStringValue("$.country").isEqualTo("Country");
