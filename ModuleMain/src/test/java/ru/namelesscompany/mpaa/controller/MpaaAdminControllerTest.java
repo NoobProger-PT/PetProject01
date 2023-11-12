@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.namelesscompany.mpaa.dto.FullMpaaDto;
 import ru.namelesscompany.mpaa.dto.NewMpaaDto;
 import ru.namelesscompany.mpaa.service.adminService.AdminMpaaService;
+import ru.namelesscompany.security.UserDetailsServ;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -24,11 +26,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = MpaaAdminController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class MpaaAdminControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     ObjectMapper mapper;
+    @MockBean
+    UserDetailsServ userDetailsServ;
     @MockBean
     private AdminMpaaService mpaaService;
 

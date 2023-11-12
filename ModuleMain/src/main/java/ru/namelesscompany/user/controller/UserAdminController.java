@@ -9,7 +9,6 @@ import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.service.adminService.AdminUserService;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(path = "/admin/users")
 @Slf4j
-@Validated
 public class UserAdminController {
 
     private final AdminUserService service;
@@ -48,9 +46,9 @@ public class UserAdminController {
 
     @PatchMapping("/{userId}")
     public FullUserDto update(@PathVariable @Positive Long userId,
-                              @Validated({Marker.Update.class}) @RequestBody NewUserDto updateUser) {
+                              @Validated({Marker.Update.class}) @RequestBody NewUserDto updatedUser) {
         log.info("Админ редактирует данные пользователя с ID: {}", userId);
-        return service.update(updateUser, userId);
+        return service.update(updatedUser, userId);
     }
 
     @DeleteMapping("/{userId}")

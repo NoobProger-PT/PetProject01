@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.namelesscompany.security.UserDetailsServ;
 import ru.namelesscompany.user.dto.ShortUserDto;
 import ru.namelesscompany.user.service.publicService.PublicUserService;
 
@@ -21,12 +23,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserPublicController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class UserPublicControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     ObjectMapper mapper;
+
+    @MockBean
+    UserDetailsServ userDetailsServ;
 
     @MockBean
     private PublicUserService userService;

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.namelesscompany.genre.dto.GenreDto;
 import ru.namelesscompany.genre.service.privateService.PrivateGenreService;
+import ru.namelesscompany.security.UserDetailsServ;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -21,9 +23,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = GenrePrivateController.class)
+@WithMockUser(value = "random name", authorities = "ROLE_OVERLORD")
 public class GenrePrivateControllerTest {
     @Autowired
     private MockMvc mockMvc;
+    @MockBean
+    UserDetailsServ userDetailsServ;
     @MockBean
     private PrivateGenreService genreService;
 
@@ -35,6 +40,7 @@ public class GenrePrivateControllerTest {
     }
 
     @Test
+    @WithMockUser("random name")
     public void shouldGetGenreById() throws Exception {
         when(genreService.getById(anyLong())).thenReturn(genreDto);
         mockMvc.perform(get("/private/genre/1")
@@ -46,6 +52,7 @@ public class GenrePrivateControllerTest {
     }
 
     @Test
+    @WithMockUser("random name")
     public void shouldGetAllGenres() throws Exception {
         when(genreService.getAll()).thenReturn(List.of(genreDto));
         mockMvc.perform(get("/private/genre/all")

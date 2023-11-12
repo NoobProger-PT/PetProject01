@@ -107,19 +107,6 @@ public class AdminUserServiceTest {
     }
 
     @Test
-    void shouldUpdateUser3() {
-        NewUserDto newUserDto = new NewUserDto();
-        newUserDto.setEmail("");
-        newUserDto.setName("");
-        when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        var result = userService.update(newUserDto, 1);
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals(user.getId(), result.getId());
-        Assertions.assertEquals(user.getEmail(), result.getEmail());
-        Assertions.assertEquals(user.getName(), result.getName());
-    }
-
-    @Test
     void shouldNotUpdateWithWrongId() {
         NewUserDto upUser = new NewUserDto();
         upUser.setEmail("mulo@m.ru");

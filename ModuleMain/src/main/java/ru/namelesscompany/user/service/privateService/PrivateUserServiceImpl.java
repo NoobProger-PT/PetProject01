@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.namelesscompany.exceptions.user.UserNotFound;
+import ru.namelesscompany.user.dto.FullUserDto;
 import ru.namelesscompany.user.dto.NewUserDto;
 import ru.namelesscompany.user.dto.UserDto;
 import ru.namelesscompany.user.mapper.UserMapper;
@@ -23,9 +24,9 @@ public class PrivateUserServiceImpl implements PrivateUserService {
     }
 
     @Override
-    public UserDto add(NewUserDto newUserDto) {
+    public FullUserDto add(NewUserDto newUserDto) {
         User user = UserMapper.mapToUser(newUserDto);
-        return UserMapper.mapToUserDto(userRepository.save(user));
+        return UserMapper.mapToUserFullDto(userRepository.save(user));
     }
 
     @Override
@@ -36,6 +37,9 @@ public class PrivateUserServiceImpl implements PrivateUserService {
         }
         if (updateUser.getEmail() != null) {
             user.setEmail(updateUser.getEmail());
+        }
+        if (updateUser.getPassword() != null) {
+            user.setPassword(updateUser.getPassword());
         }
         return UserMapper.mapToUserDto(user);
     }
